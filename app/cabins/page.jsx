@@ -1,5 +1,12 @@
-export default function Cabins() {
+import { getCabins, getCabin } from "@/lib/data-service";
+
+export default async function Cabins() {
+
+  const data =await getCabins();
+  console.log(data);
+
   return (
+
     <div>
       <h1 className='text-4xl mb-5 text-accent-400 font-medium'>
         Our Luxury Cabins
