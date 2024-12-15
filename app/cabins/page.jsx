@@ -1,13 +1,11 @@
-// app/cabins/page.js (or wherever your cabins page is)
-import CabinList from "@/components/CabinList";
-import { getCabins } from "@/lib/data-service";
+// import CabinList from "@/components/CabinList";
+import { getCabins } from '../../lib/data-service'
+import  CabinList  from '../../components/CabinList';
 
-export default async function Cabins() {
-  // Fetch the cabins data directly in the Server Component
+
+
+async function Cabins() {
   const cabins = await getCabins();
-
-
-  console.log(cabins)
 
   return (
     <div>
@@ -23,8 +21,10 @@ export default async function Cabins() {
         Welcome to paradise.
       </p>
 
-
       <CabinList cabins={cabins} />
+
     </div>
   );
 }
+
+export default Cabins;

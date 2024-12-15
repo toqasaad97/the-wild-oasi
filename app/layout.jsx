@@ -6,7 +6,7 @@ const josefin = Josefin_Sans({
 });
 
 import "../styles/globals.css";
-import Header from "@/components/Header";
+import Header from "../components/Header"
 import { Children } from "react";
 
 
@@ -25,7 +25,8 @@ export default function RootLayout({children}) {
       <body
         className={`${josefin.className} antialiased bg-primary-950 text-primary-100 min-h-screen flex flex-col relative`}
       >
-        <Header />
+ <Header />
+
 
         <div className="flex-1 px-8 py-12 grid">
           <main className="max-w-7xl mx-auto w-full">
