@@ -1,17 +1,20 @@
-import { getCabins, getCabin } from "@/lib/data-service";
+// app/cabins/page.js (or wherever your cabins page is)
+import CabinList from "@/components/CabinList";
+import { getCabins } from "@/lib/data-service";
 
 export default async function Cabins() {
+  // Fetch the cabins data directly in the Server Component
+  const cabins = await getCabins();
 
-  const data =await getCabins();
-  console.log(data);
+
+  console.log(cabins)
 
   return (
-
     <div>
-      <h1 className='text-4xl mb-5 text-accent-400 font-medium'>
+      <h1 className="text-4xl mb-5 text-accent-400 font-medium">
         Our Luxury Cabins
       </h1>
-      <p className='text-primary-200 text-lg mb-10'>
+      <p className="text-primary-200 text-lg mb-10">
         Cozy yet luxurious cabins, located right in the heart of the Italian
         Dolomites. Imagine waking up to beautiful mountain views, spending your
         days exploring the dark forests around, or just relaxing in your private
@@ -19,6 +22,9 @@ export default async function Cabins() {
         home away from home. The perfect spot for a peaceful, calm vacation.
         Welcome to paradise.
       </p>
+
+
+      <CabinList cabins={cabins} />
     </div>
   );
 }
