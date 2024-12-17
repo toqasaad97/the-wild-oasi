@@ -2,15 +2,11 @@
 
 import { useFormStatus } from "react-dom";
 
-interface SubmitButtonProps {
-  pendingLabel: string;
-  label: string;
-}
 
 export default function SubmitButton({
   pendingLabel,
   label,
-}: SubmitButtonProps) {
+}) {
   const { pending } = useFormStatus();
 
   return (

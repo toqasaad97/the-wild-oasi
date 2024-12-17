@@ -22,7 +22,7 @@ const navLinks = [
   },
   {
     name: "Guest profile",
-    href: "/account/profile",
+    href: "/profile",
     icon: <UserIcon className="h-5 w-5 text-primary-600" />,
   },
 ];
