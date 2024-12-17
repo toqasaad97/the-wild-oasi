@@ -1,11 +1,6 @@
-interface ButtonProps {
-  filter: string;
-  handleFilter: (filter: string) => void;
-  activeFilter: string;
-  label: string;
-}
 
-function Button({ filter, handleFilter, activeFilter, label }: ButtonProps) {
+
+function Button({ filter, handleFilter, activeFilter, label }) {
   return (
     <button
       className={`px-5 py-2 hover:bg-primary-700 ${

@@ -14,13 +14,14 @@ function Filter() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const activeFilter = searchParams.get("capacity") ?? "all";
+  const activeFilter = searchParams.get("capacity") || "all";
 
-  function handleFilter(filter: string) {
+  function handleFilter(filter) {
     const params = new URLSearchParams(searchParams);
     params.set("capacity", filter);
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
+
   return (
     <div className="border border-primary-800 flex">
       {filters.map((filter) => (

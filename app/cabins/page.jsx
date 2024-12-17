@@ -1,11 +1,12 @@
 // import CabinList from "@/components/CabinList";
 import { getCabins } from '../../lib/data-service'
 import  CabinList  from '../../components/CabinList';
+import  Filter  from '../../components/Filter';
+export const revalidated =3600
 
 
-
-async function Cabins() {
-  const cabins = await getCabins();
+async function Cabins({searchParams}) {
+  const filter =searchParams ?.capacity ??"all"
 
   return (
     <div>
@@ -21,7 +22,11 @@ async function Cabins() {
         Welcome to paradise.
       </p>
 
-      <CabinList cabins={cabins} />
+<div className='flex justify-end  mb-8'>
+  <Filter/>
+</div>
+
+      <CabinList filter={filter}/>
 
     </div>
   );

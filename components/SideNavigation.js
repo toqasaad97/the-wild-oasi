@@ -6,7 +6,7 @@ import {
   HomeIcon,
   UserIcon,
 } from "@heroicons/react/24/solid";
-import SignOutButton from "./SignOutButton";
+// import SignOutButton from "./SignOutButton";
 import { usePathname } from "next/navigation";
 
 const navLinks = [
@@ -36,7 +36,7 @@ function SideNavigation() {
           <li key={link.name}>
             <Link
               className={`py-3 px-5 hover:bg-primary-900
-                 hover:text-primary-100 transition-colors flex items-center 
+                 hover:text-primary-100 transition-colors flex items-center
                  gap-4 font-semibold text-primary-200 ${
                    pathname === link.href
                      ? "bg-primary-900 text-primary-100"
@@ -50,9 +50,9 @@ function SideNavigation() {
           </li>
         ))}
 
-        <li className="mt-auto">
+        {/* <li className="mt-auto">
           <SignOutButton />
-        </li>
+        </li> */}
       </ul>
     </nav>
   );

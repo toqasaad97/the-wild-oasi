@@ -1,5 +1,7 @@
 import Navigation from './Navigation';
+
 import Logo from './Logo';
+
 
 function Header() {
   return (
@@ -7,6 +9,7 @@ function Header() {
       <div className='flex justify-between items-center max-w-7xl mx-auto'>
         <Logo />
         <Navigation />
+
       </div>
     </header>
   );

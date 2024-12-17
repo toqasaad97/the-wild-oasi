@@ -21,27 +21,13 @@ export async function getCabin(id){
   return data;
 }
 
-export async function getCabinPrice(
-  id: string
-): Promise<{ regularPrice: number; discount: number }> {
-  const { data, error } = await supabase
-    .from("cabins")
-    .select("regularPrice, discount")
-    .eq("id", id)
-    .single();
 
-  // if (error) {
-  //   console.error(error);
-  // }
-
-  return data;
-}
 
 export const getCabins = async function () {
-  const { data, error } = await supabase
+  const { data } = await supabase
     .from("cabins")
-    .select("id ,name,regularPrice,discount ,image ,maxCapcity ,descripation  ,_id")
-    .order("name");
+    .select("id ,name,regularPrice,discount ,image ,maxCapcity ,description  ,_id")
+
 
   // if (error) {
   //   console.error(error);
@@ -50,3 +36,14 @@ export const getCabins = async function () {
 
   return data;
 };
+export async function getCountries() {
+  try {
+    const res = await fetch(
+      "https://restcountries.com/v2/all?fields=name,flag"
+    );
+    const countries = await res.json();
+    return countries;
+  } catch {
+    throw new Error("Could not fetch countries");
+  }
+}
