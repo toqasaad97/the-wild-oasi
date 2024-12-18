@@ -1,5 +1,4 @@
-// import CabinList from "@/components/CabinList";
-import { getCabins } from '../../lib/data-service'
+
 import  CabinList  from '../../components/CabinList';
 import  Filter  from '../../components/Filter';
 export const revalidated =3600
