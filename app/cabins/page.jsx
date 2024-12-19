@@ -1,11 +1,10 @@
+import ReservationReminder from "../../components/ReservationReminder";
+import CabinList from "../../components/CabinList";
+import Filter from "../../components/Filter";
+export const revalidated = 3600;
 
-import  CabinList  from '../../components/CabinList';
-import  Filter  from '../../components/Filter';
-export const revalidated =3600
-
-
-async function Cabins({searchParams}) {
-  const filter =searchParams ?.capacity ??"all"
+async function Cabins({ searchParams }) {
+  const filter = searchParams?.capacity ?? "all";
 
   return (
     <div>
@@ -21,12 +20,12 @@ async function Cabins({searchParams}) {
         Welcome to paradise.
       </p>
 
-<div className='flex justify-end  mb-8'>
-  <Filter/>
-</div>
+      <div className="flex justify-end  mb-8">
+        <Filter />
+      </div>
 
-      <CabinList filter={filter}/>
-
+      <CabinList filter={filter} />
+      <ReservationReminder />
     </div>
   );
 }

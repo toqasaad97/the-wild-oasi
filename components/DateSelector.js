@@ -1,8 +1,16 @@
 "use client";
-import { useState } from "react";
-import { isWithinInterval } from "date-fns";
+
+import {
+  differenceInDays,
+  isPast,
+  isSameDay,
+  isWithinInterval,
+} from "date-fns";
+
+
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
+import { useReservation } from "../context/ReservationContext";
 
 function isAlreadyBooked(range, datesArr) {
   return (
@@ -14,52 +22,54 @@ function isAlreadyBooked(range, datesArr) {
   );
 }
 
-function DateSelector() {
+function DateSelector({  cabin, bookedDates }) {
+  const { range, setRange, resetRange } = useReservation()
 
-  const regularPrice = 23;
-  const discount = 5;
-  const numNights = 5;
+  const handleSelect = (selectedRange) => {
+    if (!selectedRange) return;
+
+    setRange((prevRange) => {
+
+      if (
+        prevRange?.from?.getTime() === selectedRange?.from?.getTime() &&
+        prevRange?.to === undefined &&
+        selectedRange?.to === undefined
+      ) {
+        return prevRange;
+      }
+
+      return {
+        ...prevRange,
+        ...selectedRange,
+      };
+    });
+  };
+
+  const displayRange = isAlreadyBooked(range, bookedDates) ? {} : range;
+  const { regularPrice, discount } = cabin;
+
+  const numNights = differenceInDays(displayRange.to, displayRange.from);
   const cabinPrice = numNights * (regularPrice - discount);
 
 
-  const [selected, setSelected] = useState(null);
-  const [range, setRange] = useState({ from: null, to: null });
-
-  const minBookingLength = 1;
-  const maxBookingLength = 23;
-
-
-  const handleRangeSelect = (selectedRange) => {
-    if (selectedRange.from && selectedRange.to) {
-      setRange(selectedRange);
-    } else {
-      setRange({ from: null, to: null });
-    }
-  };
-
-  const resetRange = () => {
-    setRange({ from: null, to: null });
-  };
-
-  const totalPrice = range.from && range.to ? (range.to - range.from) / (1000 * 60 * 60 * 24) * (regularPrice - discount) : cabinPrice;
-
   return (
     <div className="flex flex-col justify-between">
-
-
       <DayPicker
         className="pt-12 place-self-center"
         mode="range"
-        selected={range}
-        onSelect={handleRangeSelect}
-        min={minBookingLength}
-        max={maxBookingLength}
-        fromMonth={new Date()}
-        toYear={new Date().getFullYear() + 5}
+        onSelect={handleSelect}
+        selected={displayRange}
+
+        startMonth={new Date()}
+        startDate={new Date()}
+        endMonth={new Date(new Date().getFullYear() + 5, 11)} anni avanti
         captionLayout="dropdown"
         numberOfMonths={2}
+        disabled={(curDate) =>
+          isPast(curDate) ||
+          bookedDates.some((date) => isSameDay(date, curDate))
+        }
       />
-
 
       <div className="flex items-center justify-between px-8 bg-accent-500 text-primary-800 h-[72px]">
         <div className="flex items-baseline gap-6">
@@ -88,7 +98,6 @@ function DateSelector() {
             </>
           ) : null}
         </div>
-
 
         {range.from || range.to ? (
           <button
