@@ -21,8 +21,6 @@ export async function getCabin(id){
   return data;
 }
 
-
-
 export const getCabins = async function () {
   const { data } = await supabase
     .from("cabins")
@@ -88,3 +86,4 @@ export async function getSettings() {
 
   return data;
 }
+
