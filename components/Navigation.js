@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { auth } from '../lib/auth';
-
-
+// import auth from "../lib/auth"
 const links = [
   { href: "/cabins", label: "Cabins" },
   { href: "/about", label: "About" },
@@ -9,7 +8,7 @@ const links = [
 ];
 
 export default async function Navigation() {
-  const session = await auth();
+  const session =await auth()
   return (
     <nav className="z-10 text-xl mt-3">
       <ul className="flex gap-16 items-center">

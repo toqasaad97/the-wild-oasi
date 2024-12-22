@@ -1,6 +1,6 @@
 
-import UpdateProfileForm  from '../../components/UpdateProfileForm';
-import  SelectCountry  from '../..//components/SelectCountry';
+import UpdateProfileForm  from "../../../components/UpdateProfileForm"
+import  SelectCountry  from '../../../components/SelectCountry';
 export const metadata = {
   title: "Update profile",
 };

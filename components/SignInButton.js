@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import signInAction from "../lib/action"
+import { signInAction } from "../lib/actions"
 function SignInButton() {
   return (
     <form action={signInAction}>

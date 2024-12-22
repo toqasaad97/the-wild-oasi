@@ -6,7 +6,7 @@ import {
   HomeIcon,
   UserIcon,
 } from "@heroicons/react/24/solid";
-// import SignOutButton from "./SignOutButton";
+import SignOutButton from "./SignOutButton";
 import { usePathname } from "next/navigation";
 
 const navLinks = [
@@ -22,7 +22,7 @@ const navLinks = [
   },
   {
     name: "Guest profile",
-    href: "/profile",
+    href: "account/profile",
     icon: <UserIcon className="h-5 w-5 text-primary-600" />,
   },
 ];
@@ -37,11 +37,10 @@ function SideNavigation() {
             <Link
               className={`py-3 px-5 hover:bg-primary-900
                  hover:text-primary-100 transition-colors flex items-center
-                 gap-4 font-semibold text-primary-200 ${
-                   pathname === link.href
-                     ? "bg-primary-900 text-primary-100"
-                     : ""
-                 }`}
+                 gap-4 font-semibold text-primary-200 ${pathname === link.href
+                  ? "bg-primary-900 text-primary-100"
+                  : ""
+                }`}
               href={link.href}
             >
               {link.icon}
@@ -50,9 +49,9 @@ function SideNavigation() {
           </li>
         ))}
 
-        {/* <li className="mt-auto">
+        <li className="mt-auto">
           <SignOutButton />
-        </li> */}
+        </li>
       </ul>
     </nav>
   );
