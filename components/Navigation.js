@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { auth } from '../lib/auth';
-// import auth from "../lib/auth"
+
 const links = [
   { href: "/cabins", label: "Cabins" },
   { href: "/about", label: "About" },

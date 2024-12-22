@@ -1,12 +1,10 @@
-
 import { notFound } from "next/navigation";
 import supabase from "./supabase";
-
 
 /////////////
 // GET
 
-export async function getCabin(id){
+export async function getCabin(id) {
   const { data, error } = await supabase
     .from("cabins")
     .select("*")
@@ -24,8 +22,9 @@ export async function getCabin(id){
 export const getCabins = async function () {
   const { data } = await supabase
     .from("cabins")
-    .select("id ,name,regularPrice,discount ,image ,maxCapcity ,description  ,_id")
-
+    .select(
+      "id ,name,regularPrice,discount ,image ,maxCapcity ,description  ,_id"
+    );
 
   // if (error) {
   //   console.error(error);
@@ -45,12 +44,10 @@ export async function getCountries() {
     throw new Error("Could not fetch countries");
   }
 }
-export async function getBookedDatesByCabinId(
-  cabinId
-) {
+export async function getBookedDatesByCabinId(cabinId) {
   let today = new Date();
   today.setUTCHours(0, 0, 0, 0);
-  today = today.toISOString() ;
+  today = today.toISOString();
 
   // Getting all bookings
   const { data, error } = await supabase
@@ -61,7 +58,6 @@ export async function getBookedDatesByCabinId(
 
   if (error) {
     console.error(error);
-
   }
 
   // Converting to actual dates to be displayed in the date picker
@@ -87,23 +83,36 @@ export async function getSettings() {
   return data;
 }
 
-export async function getGuest(email){
-  const { data, error } = await supabase
-    .from("guests")
-    .select("*")
-    .eq("email", email)
-    .single();
+export async function getGuest(email) {
+  try {
+    const { data, error } = await supabase
+      .from("guest")
+      .select("*")
+      .eq("email", email)
+      .single();
 
+    if (error) {
+      console.log("Error", error);
+    }
 
-  return data;
-}
-export async function createGuest(newGuest) {
-  const { data, error } = await supabase.from("guests").insert([newGuest]);
-
-  if (error) {
-    console.error(error);
-    
+    return data;
+  } catch (error) {
+    console.error("Error fetching guest:", error);
+    return null;
   }
+}
 
-  return data;
+export async function createGuest(newGuest) {
+  try {
+    const { data, error } = await supabase.from("guest").insert([newGuest]);
+
+    if (error) {
+      console.error("Error  guest:", error);
+    }
+
+    return data;
+  } catch (error) {
+    console.error("Error creating guest:", error);
+    return null; //
+  }
 }
