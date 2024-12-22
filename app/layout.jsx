@@ -27,8 +27,8 @@ export default function RootLayout({ children }) {
         <Header />
 
         <div className="flex flex-1">
-
-          <SideNavigation />
+{/* 
+          <SideNavigation /> */}
 
 
           <div className="flex-1 px-8 py-12">
