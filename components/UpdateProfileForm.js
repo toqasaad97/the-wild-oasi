@@ -1,13 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import countryFlag from "../public/flag.png";
 import updateGuestProfile from "../lib/actions";
-import  SubmitButton from "./SubmitButton";
-
+import SubmitButton from "./SubmitButton";
 
 function UpdateProfileForm({ guest, children }) {
-
   const { fullName, nationalID, email } = guest;
-console.log(guest)
+  console.log(guest);
   return (
     <form
       action={updateGuestProfile}
@@ -16,13 +14,9 @@ console.log(guest)
       <div className="space-y-2">
         <label>Full name</label>
         <input
-        
           readOnly
           name="fullName"
           defaultValue={fullName}
-
-
-
           className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm read-only:cursor-not-allowed read-only:bg-gray-600 read-only:text-gray-400"
         />
       </div>
