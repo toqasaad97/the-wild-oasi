@@ -18,12 +18,10 @@ export default async function Page() {
       <h1 className="font-semibold text-2xl text-accent-400 mb-4">
         Update your guest profile
       </h1>
-
       <p className="text-lg mb-8 text-primary-200">
         Providing the following information will make your check-in process
         faster and smoother. See you soon!
       </p>
-
  <UpdateProfileForm guest={{guest}}>
         <SelectCountry
           name="nationality"
