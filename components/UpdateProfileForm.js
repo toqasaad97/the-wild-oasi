@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import countryFlag from "../public/flag.png";
 import updateGuestProfile from "../lib/actions";
 import SubmitButton from "./SubmitButton";

@@ -1,12 +1,12 @@
-import { getCabins } from '../lib/data-service';
-import CabinCard from './CabinCard';
+import CabinCard from "../components/CabinCard";
+import { getCabins } from "../lib/data-service";
 
-
- async function ListCabin({ filter }) {
-  const cabins = await getCabins()
+async function ListCabin({ filter }) {
+  const cabins = await getCabins();
   if (!cabins.length) {
     return <p>No cabins found.</p>;
   }
+
   const filteredCabins = cabins.filter((cabin) => {
     if (filter === "all") return true;
     if (filter === "small") return cabin.maxCapacity <= 3;

@@ -1,12 +1,11 @@
 "use client";
 import { createContext, useContext, useState } from "react";
 
-// Create context
 const ReservationContext = createContext();
 
 const initialState = {
-  from: null, // Changed to null to represent no date selected
-  to: null,   // Changed to null to represent no date selected
+  from: null,
+  to: null,
 };
 
 function ReservationProvider({ children }) {
