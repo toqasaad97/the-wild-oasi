@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { auth } from '../lib/auth';
+import Image from 'next/image';
 
 const links = [
   { href: "/cabins", label: "Cabins" },
@@ -19,7 +20,7 @@ export default async function Navigation() {
                 href="/account"
                 className="hover:text-accent-400 transition-colors flex items-center gap-4"
               >
-                <img
+                <Image
                   className="h-8 rounded-full"
                   src={session.user.image ?? ""}
                   alt={session.user.name ?? ""}

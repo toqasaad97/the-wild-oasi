@@ -5,6 +5,7 @@ import { useReservation } from '../app/context/ReservationContext';
 import { differenceInDays } from 'date-fns';
 import { createBooking } from '../lib/actions';
 import SubmitButton from './SubmitButton';
+import Image from 'next/image';
 
 // "use client";
 
@@ -40,8 +41,7 @@ function ReservationForm({ cabin, user }) {
         <p>Logged in as</p>
 
         <div className="flex gap-4 items-center">
-          <img
-
+          <Image
             referrerPolicy="no-referrer"
             className="h-8 rounded-full"
             src={user.image}

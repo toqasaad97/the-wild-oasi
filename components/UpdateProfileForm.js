@@ -1,6 +1,7 @@
 import countryFlag from "../public/flag.png";
-import updateGuestProfile from "../lib/actions";
+import {updateGuestProfile} from "../lib/actions";
 import SubmitButton from "./SubmitButton";
+import Image from "next/image";
 
 function UpdateProfileForm({ guest, children }) {
   const { fullName, nationalID, email } = guest;
@@ -33,7 +34,7 @@ function UpdateProfileForm({ guest, children }) {
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <label htmlFor="nationality">Where are you from?</label>
-          <img
+          <Image
             src={countryFlag}
             alt="Country flag"
             className="h-5 rounded-sm"
