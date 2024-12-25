@@ -5,7 +5,7 @@
 
 ## Live Demo
 Check out the live demo of the project here:  
-[Live Demo Link](#)
+[Live Demo Link](https://the-wild-oasi-qsi8.vercel.app/)
 
 ## Key Features
 
