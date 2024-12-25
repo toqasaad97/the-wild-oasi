@@ -1,40 +1,42 @@
-"use client";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import Button from "./Button";
+import { Suspense } from "react";
 
-const filters = [
-  { name: "all", label: "All cabins" },
-  { name: "small", label: "2-3 guests" },
-  { name: "medium", label: "4-7 guests" },
-  { name: "large", label: "8-12 guests" },
-];
+import ReservationReminder from "./ReservationReminder";
+import Spinner from "./Spinner";
+import Filter from "./Filter";
+import ListCabin from "./ListCabin";
 
-function Filter() {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
+export const metadata = {
+  title: "Cabins",
+};
 
-  const activeFilter = searchParams.get("capacity") || "all";
+export const revalidated = 3600;
 
-  function handleFilter(filter) {
-    const params = new URLSearchParams(searchParams);
-    params.set("capacity", filter);
-    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
-  }
+export default async function Cabins({ searchParams }) {
+  const capacity = searchParams?.capacity ?? "all";
 
   return (
-    <div className="border border-primary-800 flex">
-      {filters.map((filter) => (
-        <Button
-          key={filter.name}
-          filter={filter.name}
-          handleFilter={handleFilter}
-          activeFilter={activeFilter}
-          label={filter.label}
-        />
-      ))}
+    <div>
+      <h1 className="text-4xl mb-5 text-accent-400 font-medium">
+        Our Luxury Cabins
+      </h1>
+      <p className="text-primary-200 text-lg mb-10">
+        Cozy yet luxurious cabins, located right in the heart of the Italian
+        Dolomites. Imagine waking up to beautiful mountain views, spending your
+        days exploring the dark forests around, or just relaxing in your private
+        hot tub under the stars. Enjoy nature&apos;s beauty in your own little
+        home away from home. The perfect spot for a peaceful, calm vacation.
+        Welcome to paradise.
+      </p>
+
+      <div className="flex justify-end mb-8">
+        <Filter />
+      </div>
+
+      <Suspense fallback={<Spinner />} key={capacity}>
+        <ListCabin filter={capacity} />
+        <ReservationReminder />
+
+      </Suspense>
     </div>
   );
 }
-
-export default Filter;

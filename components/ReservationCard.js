@@ -1,21 +1,13 @@
 import { PencilSquareIcon } from "@heroicons/react/24/solid";
 import { format, formatDistance, isPast, isToday, parseISO } from "date-fns";
-import DeleteReservation from "./DeleteReservation";
-import { Bookings } from "@/types";
-import Image from "next/image";
 import Link from "next/link";
 
-interface ReservationCardProps {
-  onDelete: (bookingId: number) => Promise<void>;
-  booking: Bookings;
-}
-
-export const formatDistanceFromNow = (dateStr: string) =>
+export const formatDistanceFromNow = (dateStr) =>
   formatDistance(parseISO(dateStr), new Date(), {
     addSuffix: true,
   }).replace("about ", "");
 
-function ReservationCard({ booking, onDelete }: ReservationCardProps) {
+function ReservationCard({ booking, onDelete }) {
   const {
     id,
     startDate,
@@ -24,24 +16,16 @@ function ReservationCard({ booking, onDelete }: ReservationCardProps) {
     totalPrice,
     numGuests,
     created_at,
-    cabins: { name, image },
+    // cabins: { name, image },
   } = booking;
 
   return (
     <div className="flex border border-primary-800">
-      <div className="relative h-32 aspect-square">
-        <Image
-          src={image}
-          fill
-          alt={`Cabin ${name}`}
-          className="object-cover border-r border-primary-800"
-        />
-      </div>
 
       <div className="flex-grow px-6 py-3 flex flex-col">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">
-            {numNights} nights in Cabin {name}
+            {numNights} nights in Cabin
           </h2>
           {isPast(new Date(startDate)) ? (
             <span className="bg-yellow-800 text-yellow-200 h-7 px-3 uppercase text-xs font-bold flex items-center rounded-sm">
@@ -84,7 +68,6 @@ function ReservationCard({ booking, onDelete }: ReservationCardProps) {
               <PencilSquareIcon className="h-5 w-5 text-primary-600 group-hover:text-primary-800 transition-colors" />
               <span className="mt-1">Edit</span>
             </Link>
-            <DeleteReservation onDelete={onDelete} bookingId={id} />
           </>
         ) : null}
       </div>

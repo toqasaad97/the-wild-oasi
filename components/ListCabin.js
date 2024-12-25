@@ -2,7 +2,7 @@ import { getCabins } from '../lib/data-service';
 import CabinCard from './CabinCard';
 
 
- async function CabinList({ filter }) {
+ async function ListCabin({ filter }) {
   const cabins = await getCabins()
   if (!cabins.length) {
     return <p>No cabins found.</p>;
@@ -24,4 +24,4 @@ import CabinCard from './CabinCard';
   );
 }
 
-export default CabinList;
+export default ListCabin;

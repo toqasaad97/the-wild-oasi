@@ -1,16 +1,13 @@
 "use client";
-
+import { useReservation } from "../app/context/ReservationContext";
 import {
   differenceInDays,
   isPast,
   isSameDay,
   isWithinInterval,
 } from "date-fns";
-
-
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import { useReservation } from "../context/ReservationContext";
 
 function isAlreadyBooked(range, datesArr) {
   return (
@@ -22,47 +19,34 @@ function isAlreadyBooked(range, datesArr) {
   );
 }
 
-function DateSelector({  cabin, bookedDates }) {
-  const { range, setRange, resetRange } = useReservation()
+function DateSelector({ settings, bookedDates, cabin }) {
+  const { range, setRange, resetRange } = useReservation();
 
-  const handleSelect = (selectedRange) => {
-    if (!selectedRange) return;
+  const displayRange = isAlreadyBooked(range, bookedDates)
+    ? {
+      from: undefined,
+      to: undefined,
+    }
+    : range;
 
-    setRange((prevRange) => {
-
-      if (
-        prevRange?.from?.getTime() === selectedRange?.from?.getTime() &&
-        prevRange?.to === undefined &&
-        selectedRange?.to === undefined
-      ) {
-        return prevRange;
-      }
-
-      return {
-        ...prevRange,
-        ...selectedRange,
-      };
-    });
-  };
-
-  const displayRange = isAlreadyBooked(range, bookedDates) ? {} : range;
   const { regularPrice, discount } = cabin;
-
   const numNights = differenceInDays(displayRange.to, displayRange.from);
   const cabinPrice = numNights * (regularPrice - discount);
 
+  const { minBookingLength, maxBookingLength } = settings;
 
   return (
     <div className="flex flex-col justify-between">
       <DayPicker
         className="pt-12 place-self-center"
         mode="range"
-        onSelect={handleSelect}
+        onSelect={setRange}
         selected={displayRange}
-
-        startMonth={new Date()}
-        startDate={new Date()}
-        endMonth={new Date(new Date().getFullYear() + 5, 11)} anni avanti
+        min={minBookingLength + 1}
+        max={maxBookingLength}
+        fromMonth={new Date()}
+        fromDate={new Date()}
+        toYear={new Date().getFullYear() + 5}
         captionLayout="dropdown"
         numberOfMonths={2}
         disabled={(curDate) =>

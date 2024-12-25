@@ -1,10 +1,5 @@
-// import { NextResponse } from "next/server";
+import { auth } from "./lib/auth";
 
-// export function middleware (request){
-// console.log(request);
-//  return  NextResponse.redirect (new URL("/about" ,request.URL))
-// }
-import {auth  } from "./lib/auth";
 export const middleware = auth;
 
 export const config = {

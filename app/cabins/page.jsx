@@ -1,16 +1,20 @@
-import ReservationReminder from "../../components/ReservationReminder";
-import CabinList from "../../components/CabinList";
-import Filter from "../../components/Filter";
-export const revalidated = 3600;
+// app/cabins/page.jsx
 
-async function Cabins({ searchParams }) {
-  const filter = searchParams?.capacity ?? "all";
+import { Suspense } from 'react';
+import ListCabin from '../../components/ListCabin';
+import ReservationReminder from "../../components/ReservationReminder" ;
+import Spinner from '../../components/Spinner';
+import Filter from '../../components/Filter';
 
+
+export default async function Page( searchParams ) {
+
+  const capacity = searchParams?.capacity?? "all";
+
+  console.log(capacity);
   return (
     <div>
-      <h1 className="text-4xl mb-5 text-accent-400 font-medium">
-        Our Luxury Cabins
-      </h1>
+      <h1 className="text-4xl mb-5 text-accent-400 font-medium">Our Luxury Cabins</h1>
       <p className="text-primary-200 text-lg mb-10">
         Cozy yet luxurious cabins, located right in the heart of the Italian
         Dolomites. Imagine waking up to beautiful mountain views, spending your
@@ -20,14 +24,15 @@ async function Cabins({ searchParams }) {
         Welcome to paradise.
       </p>
 
-      <div className="flex justify-end  mb-8">
+      <div className="flex justify-end mb-8">
         <Filter />
       </div>
 
-      <CabinList filter={filter} />
-      <ReservationReminder />
+
+      <Suspense fallback={<Spinner />}>
+        <ListCabin filter={capacity} /> 
+        <ReservationReminder />
+      </Suspense>
     </div>
   );
 }
-
-export default Cabins;

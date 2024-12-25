@@ -29,7 +29,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "context/ReservationContext.jsx"  ],
+, "app/context/ReservationContext.jsx", "app/account/reservations/edit/[bookingId]/page.jsx"  ],
   "exclude": [
     "node_modules"
   ]

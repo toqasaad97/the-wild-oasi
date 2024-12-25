@@ -1,13 +1,13 @@
-import ReservatoinList from "@/components/ReservatoinList";
-import { auth } from "@/lib/auth";
-import { getBookings } from "@/lib/data-service";
+import ReservatoinList from "../../../components/ReservatoinList";
+import { auth } from "../../../lib/auth";
+import { getBookings } from "../../../lib/data-service";
 
 export const metadata = {
   title: "Reservations",
 };
 
 export default async function Page() {
-  const session = (await auth()) ;
+  const session = await auth();
   const bookings = await getBookings(session?.user?.guestId);
   console.log(bookings);
 
